@@ -84,18 +84,18 @@ class App extends Component {
       });
   };
 
-  onDelete = (e) => {
-    console.log(e.target.value);
+  onDelete = e => {
+    e.preventDefault();
     const headers = new Headers();
     headers.append("Content-Type", "application/json");
 
     const options = {
       headers,
-      method: "DELETE"
+      method: "delete"
     };
 
-    fetch(`https://reqres.in/api/users/${e.target.value}`, options)
-      .then(response => {
+    fetch(`https://reqres.in/api/users/${e.target.value}`, options).then(
+      response => {
         // If response not okay, throw an error
         if (!response.ok) {
           throw new Error(`${response.status} ${response.statusText}`);
@@ -103,14 +103,9 @@ class App extends Component {
 
         console.log(response);
         // Otherwise, extract the response into json
-        return response.json();
-      })
-      .then(json => {
-        // Update the user list and isFetching.
-        // Reset the form in a callback after state is set.
-        console.log(json);
-      })
-     
+        return response;
+      }
+    );
   };
 
   render() {
@@ -119,7 +114,11 @@ class App extends Component {
       <div className="App">
         <JumbotronInstance />
 
-        <UserList users={users} isFetching={isFetching} onClick={this.onDelete}/>
+        <UserList
+          users={users}
+          isFetching={isFetching}
+          onClick={this.onDelete}
+        />
 
         <br />
         <UserForm onSubmit={this.onAddUser} />
