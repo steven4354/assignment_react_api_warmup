@@ -1,12 +1,10 @@
-import React, {Component} from 'react'
-import UserCard from './UserCard'
+import React, {Component} from "react";
+import UserCard from "./UserCard";
 
 // Convert to a functional component and use props
 // instead of state for users and isFetching
-const UserList =({users, isFetching}) => {
-  const userList = users.map((user) =>
-    <UserCard user={user} key={user.id} />
-  )
+const UserList = ({users, isFetching}) => {
+  const userList = users.map(user => <UserCard user={user} key={user.id} />);
 
   return (
     <div className="container">
@@ -15,7 +13,7 @@ const UserList =({users, isFetching}) => {
         {isFetching ? <p>Loading...</p> : userList}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserList
+export default UserList;

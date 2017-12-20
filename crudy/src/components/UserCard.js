@@ -1,19 +1,23 @@
 // UserCard.js
-import React from 'react'
+import React from "react";
 
-const UserList =({users, isFetching}) => {
-  const userList = users.map((user) =>
-    <UserCard user={user} key={user.id} />
-  )
+const UserCard = ({user, key}) => {
+  const {first_name, last_name, avatar} = user;
 
   return (
-    <div className="container">
-      <h1>User List</h1>
-      <div className="card-group">
-        {isFetching ? <p>Loading...</p> : userList}
+    <div key={key} className="UserCard card" style={{maxWidth: "128px"}}>
+      <img
+        className="card-img-top img-fluid"
+        src={user.avatar}
+        alt="user avatar"
+      />
+      <div className="card-block">
+        <h4>
+          {first_name} {last_name}
+        </h4>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default UserCard
+export default UserCard;
