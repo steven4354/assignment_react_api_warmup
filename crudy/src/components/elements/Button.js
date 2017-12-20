@@ -1,9 +1,9 @@
 import React, {Component} from "react";
 import {Button} from "react-bootstrap";
 
-const ButtonInstance = ({text}) => {
+const ButtonInstance = ({text, type, onClick, value}) => {
   return (
-    <Button type="submit" bsStyle="primary">
+    <Button type={type} bsStyle="primary" onClick={onClick} value={value}>
       {text}
     </Button>
   );

@@ -3,8 +3,8 @@ import UserCard from "./UserCard";
 
 // Convert to a functional component and use props
 // instead of state for users and isFetching
-const UserList = ({users, isFetching}) => {
-  const userList = users.map(user => <UserCard user={user} key={user.id} />);
+const UserList = ({users, isFetching, onClick}) => {
+  const userList = users.map(user => <UserCard user={user} key={user.id} onClick={onClick}/>);
 
   return (
     <div className="container">

@@ -34,6 +34,8 @@ class App extends Component {
     e.preventDefault();
     const form = e.target;
     const body = serialize(form, {hash: true});
+    console.log(form);
+    console.log(body);
 
     // Create headers to set the content type to json
     const headers = new Headers();
@@ -82,13 +84,42 @@ class App extends Component {
       });
   };
 
+  onDelete = (e) => {
+    console.log(e.target.value);
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+
+    const options = {
+      headers,
+      method: "DELETE"
+    };
+
+    fetch(`https://reqres.in/api/users/${e.target.value}`, options)
+      .then(response => {
+        // If response not okay, throw an error
+        if (!response.ok) {
+          throw new Error(`${response.status} ${response.statusText}`);
+        }
+
+        console.log(response);
+        // Otherwise, extract the response into json
+        return response.json();
+      })
+      .then(json => {
+        // Update the user list and isFetching.
+        // Reset the form in a callback after state is set.
+        console.log(json);
+      })
+     
+  };
+
   render() {
     const {users, isFetching} = this.state;
     return (
       <div className="App">
         <JumbotronInstance />
 
-        <UserList users={users} isFetching={isFetching} />
+        <UserList users={users} isFetching={isFetching} onClick={this.onDelete}/>
 
         <br />
         <UserForm onSubmit={this.onAddUser} />
